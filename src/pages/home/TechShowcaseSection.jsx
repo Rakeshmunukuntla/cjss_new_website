@@ -390,7 +390,7 @@ export default function TechShowcaseSection() {
       </div>
 
       {/* Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes techScroll {
           0% {
             transform: translateX(0);

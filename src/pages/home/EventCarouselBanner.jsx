@@ -480,10 +480,9 @@ export default function EventCarouselBanner() {
     fetchEvents();
   }, []);
 
-  // Auto-slide with progress - FIXED: Only runs when NOT paused
   useEffect(() => {
     if (events.length === 0 || isPaused) {
-      return; // Don't run timer when paused
+      return;
     }
 
     const duration = 6000;
@@ -528,7 +527,6 @@ export default function EventCarouselBanner() {
     setProgress(0);
   }, [events.length]);
 
-  // Toggle play/pause
   const togglePlayPause = () => {
     setIsPaused((prev) => !prev);
   };
@@ -640,25 +638,16 @@ export default function EventCarouselBanner() {
 
             {/* Multi-layer gradient overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/70 to-slate-950/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/30" />
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/30 via-transparent to-purple-950/20" />
 
-            {/* Animated grain texture */}
-            <div className="absolute inset-0 opacity-[0.015] mix-blend-overlay">
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
-            </div>
-
-            {/* Decorative light beams */}
-            <div className="absolute -top-20 left-1/4 w-96 h-[600px] bg-gradient-to-b from-sky-500/10 via-transparent to-transparent rotate-12 blur-3xl" />
-            <div className="absolute -top-20 right-1/3 w-64 h-[400px] bg-gradient-to-b from-purple-500/10 via-transparent to-transparent -rotate-12 blur-3xl" />
-
-            {/* Text Content */}
-            <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 xl:px-32">
+            {/* Text Content - Adjusted padding for mobile */}
+            <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-16 pb-40 sm:pb-32">
               <div className="max-w-4xl">
                 {/* Event badge */}
                 <div
                   className={`
-                    inline-flex items-center gap-3 px-5 py-2.5 mb-8 rounded-full 
+                    inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 mb-6 sm:mb-8 rounded-full 
                     bg-white/5 backdrop-blur-xl border border-white/10 
                     shadow-[0_8px_32px_rgba(0,0,0,0.3)] w-fit
                     transition-all duration-700 delay-100
@@ -669,28 +658,28 @@ export default function EventCarouselBanner() {
                     }
                   `}
                 >
-                  <span className="relative flex h-2.5 w-2.5">
+                  <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                     <span
                       className={`absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 ${
                         !isPaused ? "animate-ping" : ""
                       }`}
                     />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gradient-to-r from-sky-400 to-cyan-300" />
+                    <span className="relative inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-gradient-to-r from-sky-400 to-cyan-300" />
                   </span>
-                  <span className="text-xs font-semibold tracking-[0.2em] text-white/90 uppercase">
+                  <span className="text-[10px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] text-white/90 uppercase">
                     {isPaused ? "Paused" : "Featured Event"}
                   </span>
-                  <span className="w-px h-4 bg-white/20" />
-                  <span className="text-xs text-white/60">
+                  <span className="w-px h-3 sm:h-4 bg-white/20" />
+                  <span className="text-[10px] sm:text-xs text-white/60">
                     {current + 1} of {events.length}
                   </span>
                 </div>
 
-                {/* Title with gradient and glow */}
+                {/* Title - Responsive text sizes */}
                 <h1
                   className={`
-                    mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black 
-                    leading-[1.05] transition-all duration-700 delay-200
+                    mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black 
+                    leading-[1.1] transition-all duration-700 delay-200
                     ${
                       isActive
                         ? "opacity-100 translate-y-0"
@@ -706,10 +695,10 @@ export default function EventCarouselBanner() {
                   </span>
                 </h1>
 
-                {/* Subtitle */}
+                {/* Subtitle - Responsive */}
                 <p
                   className={`
-                    mb-10 text-lg sm:text-xl md:text-2xl font-light text-white/70 
+                    mb-8 sm:mb-10 text-base sm:text-lg md:text-xl lg:text-2xl font-light text-white/70 
                     max-w-2xl leading-relaxed transition-all duration-700 delay-300
                     ${
                       isActive
@@ -721,10 +710,10 @@ export default function EventCarouselBanner() {
                   {slide.subtitle}
                 </p>
 
-                {/* CTA Buttons */}
+                {/* CTA Buttons - Stack on mobile */}
                 <div
                   className={`
-                    flex flex-wrap items-center gap-4
+                    flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4
                     transition-all duration-700 delay-400
                     ${
                       isActive
@@ -736,7 +725,7 @@ export default function EventCarouselBanner() {
                   {/* Primary CTA */}
                   <button
                     onClick={() => navigate(`/events/${slide._id}`)}
-                    className="group relative inline-flex items-center gap-3 px-8 py-4 text-base font-semibold text-white rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 transition-all duration-500" />
                     <div className="absolute inset-0 bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -745,12 +734,12 @@ export default function EventCarouselBanner() {
                       <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
                     </div>
 
-                    <div className="absolute inset-[1px] rounded-2xl bg-gradient-to-b from-white/20 to-transparent opacity-50" />
+                    <div className="absolute inset-[1px] rounded-xl sm:rounded-2xl bg-gradient-to-b from-white/20 to-transparent opacity-50" />
 
-                    <span className="relative z-10 flex items-center gap-3">
+                    <span className="relative z-10 flex items-center gap-2 sm:gap-3">
                       <span>Explore Event</span>
                       <svg
-                        className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                        className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -764,19 +753,19 @@ export default function EventCarouselBanner() {
                       </svg>
                     </span>
 
-                    <div className="absolute -inset-2 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 -z-10" />
+                    <div className="absolute -inset-2 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 rounded-2xl sm:rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 -z-10" />
                   </button>
 
                   {/* Secondary CTA */}
                   <button
                     onClick={() => navigate("/events")}
-                    className="group relative inline-flex items-center gap-3 px-8 py-4 text-base font-semibold text-white rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group relative inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20" />
+                    <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20" />
 
                     <span className="relative z-10 flex items-center gap-2">
                       <svg
-                        className="w-5 h-5"
+                        className="w-4 h-4 sm:w-5 sm:h-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -799,176 +788,191 @@ export default function EventCarouselBanner() {
       })}
 
       {/* ============================================ */}
-      {/* PREMIUM ATTRACTIVE SIDE NAVIGATION BUTTONS */}
+      {/* SIDE NAVIGATION - Hidden on mobile, shown via bottom controls */}
       {/* ============================================ */}
 
-      {/* Left Navigation Button */}
+      {/* Left Navigation Button - Hidden on mobile */}
       <button
         onClick={goToPrev}
-        className="group absolute left-4 md:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 focus:outline-none"
+        className="hidden md:block group absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 focus:outline-none"
         aria-label="Previous slide"
       >
         <div className="relative">
-          {/* Outer animated ring */}
           <div className="absolute -inset-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 animate-spin-slow opacity-70 blur-sm" />
           </div>
 
-          {/* Glow effect */}
           <div className="absolute -inset-4 rounded-full bg-sky-500/20 blur-xl opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-all duration-300" />
 
-          {/* Main button */}
-          <div className="relative w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden transition-all duration-300 group-hover:scale-110 group-active:scale-95">
-            {/* Background layers */}
+          <div className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full overflow-hidden transition-all duration-300 group-hover:scale-110 group-active:scale-95">
             <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-xl" />
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5" />
 
-            {/* Animated border */}
             <div className="absolute inset-0 rounded-full p-[2px]">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-sky-400 via-cyan-400 to-indigo-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute inset-[2px] rounded-full bg-slate-900/90" />
             </div>
 
-            {/* Shine effect on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden rounded-full">
-              <div className="absolute -inset-full top-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:translate-x-full transition-transform duration-1000" />
-            </div>
-
-            {/* Arrow icon */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative">
-                {/* Arrow glow */}
-                <svg
-                  className="absolute w-5 h-5 md:w-6 md:h-6 text-sky-400 blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                {/* Arrow */}
-                <svg
-                  className="relative w-5 h-5 md:w-6 md:h-6 text-white/70 group-hover:text-white transition-all duration-300 group-hover:-translate-x-0.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </div>
+              <svg
+                className="w-5 h-5 lg:w-6 lg:h-6 text-white/70 transition-all duration-300 group-hover:text-white group-hover:-translate-x-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
             </div>
-
-            {/* Pulse rings on hover */}
-            <div className="absolute inset-0 rounded-full border border-sky-400/50 scale-100 opacity-0 group-hover:scale-150 group-hover:opacity-0 transition-all duration-700 group-hover:duration-1000" />
-            <div className="absolute inset-0 rounded-full border border-cyan-400/30 scale-100 opacity-0 group-hover:scale-[1.8] group-hover:opacity-0 transition-all duration-700 delay-100 group-hover:duration-1000" />
-          </div>
-
-          {/* Floating particles on hover */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-1 h-1 rounded-full bg-sky-400 absolute opacity-0 group-hover:opacity-100 group-hover:-translate-x-8 group-hover:-translate-y-4 transition-all duration-500" />
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 absolute opacity-0 group-hover:opacity-100 group-hover:-translate-x-6 group-hover:translate-y-5 transition-all duration-700 delay-100" />
-            <div className="w-1 h-1 rounded-full bg-indigo-400 absolute opacity-0 group-hover:opacity-100 group-hover:-translate-x-10 group-hover:translate-y-1 transition-all duration-600 delay-200" />
           </div>
         </div>
       </button>
 
-      {/* Right Navigation Button */}
+      {/* Right Navigation Button - Hidden on mobile */}
       <button
         onClick={goToNext}
-        className="group absolute right-4 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-30 focus:outline-none"
+        className="hidden md:block group absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 focus:outline-none"
         aria-label="Next slide"
       >
         <div className="relative">
-          {/* Outer animated ring */}
           <div className="absolute -inset-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-indigo-500 to-sky-500 animate-spin-slow-reverse opacity-70 blur-sm" />
           </div>
 
-          {/* Glow effect */}
           <div className="absolute -inset-4 rounded-full bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 group-active:opacity-80 transition-all duration-300" />
 
-          {/* Main button */}
-          <div className="relative w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full overflow-hidden transition-all duration-300 group-hover:scale-110 group-active:scale-95">
-            {/* Background layers */}
+          <div className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full overflow-hidden transition-all duration-300 group-hover:scale-110 group-active:scale-95">
             <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-xl" />
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5" />
 
-            {/* Animated border */}
             <div className="absolute inset-0 rounded-full p-[2px]">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 via-indigo-400 to-sky-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute inset-[2px] rounded-full bg-slate-900/90" />
             </div>
 
-            {/* Shine effect on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden rounded-full">
-              <div className="absolute -inset-full top-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:translate-x-full transition-transform duration-1000" />
-            </div>
-
-            {/* Arrow icon */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative">
-                {/* Arrow glow */}
-                <svg
-                  className="absolute w-5 h-5 md:w-6 md:h-6 text-purple-400 blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-                {/* Arrow */}
-                <svg
-                  className="relative w-5 h-5 md:w-6 md:h-6 text-white/70 group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </div>
+              <svg
+                className="w-5 h-5 lg:w-6 lg:h-6 text-white/70 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </div>
-
-            {/* Pulse rings on hover */}
-            <div className="absolute inset-0 rounded-full border border-purple-400/50 scale-100 opacity-0 group-hover:scale-150 group-hover:opacity-0 transition-all duration-700 group-hover:duration-1000" />
-            <div className="absolute inset-0 rounded-full border border-indigo-400/30 scale-100 opacity-0 group-hover:scale-[1.8] group-hover:opacity-0 transition-all duration-700 delay-100 group-hover:duration-1000" />
-          </div>
-
-          {/* Floating particles on hover */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-1 h-1 rounded-full bg-purple-400 absolute opacity-0 group-hover:opacity-100 group-hover:translate-x-8 group-hover:-translate-y-4 transition-all duration-500" />
-            <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 absolute opacity-0 group-hover:opacity-100 group-hover:translate-x-6 group-hover:translate-y-5 transition-all duration-700 delay-100" />
-            <div className="w-1 h-1 rounded-full bg-sky-400 absolute opacity-0 group-hover:opacity-100 group-hover:translate-x-10 group-hover:translate-y-1 transition-all duration-600 delay-200" />
           </div>
         </div>
       </button>
 
       {/* ============================================ */}
-      {/* BOTTOM CONTROLS */}
+      {/* MOBILE-OPTIMIZED BOTTOM CONTROLS */}
       {/* ============================================ */}
-      <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20">
-        <div className="flex flex-col items-center gap-6">
-          {/* Thumbnail indicators */}
-          <div className="flex items-center gap-2 md:gap-3 p-2 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        {/* Gradient background for controls */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent pointer-events-none" />
+
+        <div className="relative px-4 sm:px-6 pb-6 sm:pb-8 pt-16">
+          {/* Mobile Navigation Row */}
+          <div className="flex items-center justify-between gap-4 mb-4 md:hidden">
+            {/* Mobile Prev Button */}
+            <button
+              onClick={goToPrev}
+              className="group w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-300 active:scale-95"
+              aria-label="Previous slide"
+            >
+              <svg
+                className="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Thumbnail indicators - Scrollable on mobile */}
+            <div className="flex-1 overflow-x-auto scrollbar-hide">
+              <div className="flex items-center justify-center gap-2">
+                {events.map((event, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goToSlide(i)}
+                    className={`
+                      relative flex-shrink-0 overflow-hidden rounded-lg transition-all duration-500
+                      ${
+                        current === i
+                          ? "w-16 sm:w-20 h-10 sm:h-12 ring-2 ring-white/50"
+                          : "w-10 sm:w-12 h-10 sm:h-12 opacity-60 hover:opacity-100"
+                      }
+                    `}
+                    aria-label={`Go to slide ${i + 1}`}
+                  >
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div
+                      className={`absolute inset-0 ${
+                        current === i ? "bg-sky-500/30" : "bg-black/40"
+                      }`}
+                    />
+
+                    {current === i && (
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 overflow-hidden">
+                        <div
+                          className={`h-full bg-gradient-to-r from-sky-400 to-purple-500 ${
+                            isPaused
+                              ? ""
+                              : "transition-all duration-100 ease-linear"
+                          }`}
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile Next Button */}
+            <button
+              onClick={goToNext}
+              className="group w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-300 active:scale-95"
+              aria-label="Next slide"
+            >
+              <svg
+                className="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Desktop Thumbnail indicators */}
+          <div className="hidden md:flex items-center justify-center gap-3 mb-4">
             {events.map((event, i) => (
               <button
                 key={i}
@@ -977,8 +981,8 @@ export default function EventCarouselBanner() {
                   group relative overflow-hidden rounded-xl transition-all duration-500
                   ${
                     current === i
-                      ? "w-20 md:w-28 h-12 md:h-16"
-                      : "w-12 md:w-16 h-12 md:h-16 hover:w-16 md:hover:w-20"
+                      ? "w-24 lg:w-28 h-14 lg:h-16"
+                      : "w-14 lg:w-16 h-14 lg:h-16 hover:w-18 lg:hover:w-20"
                   }
                 `}
                 aria-label={`Go to slide ${i + 1}`}
@@ -1005,8 +1009,10 @@ export default function EventCarouselBanner() {
                     <div className="absolute inset-0 rounded-xl border-2 border-white/50" />
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 overflow-hidden rounded-b-xl">
                       <div
-                        className={`h-full bg-gradient-to-r from-sky-400 to-purple-500 transition-all ease-linear ${
-                          isPaused ? "" : "duration-100"
+                        className={`h-full bg-gradient-to-r from-sky-400 to-purple-500 ${
+                          isPaused
+                            ? ""
+                            : "transition-all duration-100 ease-linear"
                         }`}
                         style={{ width: `${progress}%` }}
                       />
@@ -1023,81 +1029,74 @@ export default function EventCarouselBanner() {
             ))}
           </div>
 
-          {/* Controls row */}
-          <div className="flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10">
-            {/* Play/Pause button */}
-            <button
-              onClick={togglePlayPause}
-              className={`
-                group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300
-                ${
-                  isPaused
-                    ? "bg-gradient-to-r from-sky-500 to-purple-500 shadow-lg shadow-sky-500/25"
-                    : "bg-white/5 hover:bg-white/10 border border-white/10"
-                }
-              `}
-              aria-label={isPaused ? "Play" : "Pause"}
-            >
-              {isPaused ? (
-                // Play icon
-                <svg
-                  className="w-5 h-5 text-white ml-0.5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              ) : (
-                // Pause icon
-                <svg
-                  className="w-5 h-5 text-white/70 group-hover:text-white transition-colors"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                </svg>
-              )}
+          {/* Bottom Control Bar */}
+          <div className="flex items-center justify-center">
+            <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10">
+              {/* Play/Pause button */}
+              <button
+                onClick={togglePlayPause}
+                className={`
+                  group relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300
+                  ${
+                    isPaused
+                      ? "bg-gradient-to-r from-sky-500 to-purple-500 shadow-lg shadow-sky-500/25"
+                      : "bg-white/5 hover:bg-white/10 border border-white/10"
+                  }
+                `}
+                aria-label={isPaused ? "Play" : "Pause"}
+              >
+                {isPaused ? (
+                  <svg
+                    className="w-4 h-4 text-white ml-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-4 h-4 text-white/70 group-hover:text-white transition-colors"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  </svg>
+                )}
+              </button>
 
-              {/* Ripple effect when playing */}
-              {!isPaused && (
-                <div className="absolute inset-0 rounded-full">
-                  <div className="absolute inset-0 rounded-full border border-white/20 animate-ping opacity-20" />
+              <div className="w-px h-5 sm:h-6 bg-white/20" />
+
+              {/* Counter */}
+              <div className="flex items-center gap-2 sm:gap-3 text-white/60 text-xs sm:text-sm font-medium">
+                <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-sky-400 to-purple-400 bg-clip-text text-transparent">
+                  {String(current + 1).padStart(2, "0")}
+                </span>
+                <div className="w-8 sm:w-12 h-0.5 sm:h-1 bg-white/20 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full bg-gradient-to-r from-sky-400 to-purple-500 rounded-full ${
+                      isPaused ? "" : "transition-all duration-100"
+                    }`}
+                    style={{ width: `${progress}%` }}
+                  />
                 </div>
-              )}
-            </button>
-
-            <div className="w-px h-6 bg-white/20" />
-
-            {/* Counter */}
-            <div className="flex items-center gap-3 text-white/60 text-sm font-medium">
-              <span className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-purple-400 bg-clip-text text-transparent">
-                {String(current + 1).padStart(2, "0")}
-              </span>
-              <div className="w-12 h-1 bg-white/20 rounded-full overflow-hidden">
-                <div
-                  className={`h-full bg-gradient-to-r from-sky-400 to-purple-500 rounded-full ${
-                    isPaused ? "" : "transition-all duration-100"
-                  }`}
-                  style={{ width: `${progress}%` }}
-                />
+                <span className="text-sm sm:text-lg text-white/40">
+                  {String(events.length).padStart(2, "0")}
+                </span>
               </div>
-              <span className="text-lg text-white/40">
-                {String(events.length).padStart(2, "0")}
-              </span>
-            </div>
 
-            <div className="w-px h-6 bg-white/20" />
+              <div className="w-px h-5 sm:h-6 bg-white/20" />
 
-            {/* Status indicator */}
-            <div className="flex items-center gap-2">
-              <div
-                className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                  isPaused ? "bg-amber-400" : "bg-emerald-400 animate-pulse"
-                }`}
-              />
-              <span className="text-xs text-white/50 uppercase tracking-wider">
-                {isPaused ? "Paused" : "Auto"}
-              </span>
+              {/* Status indicator */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div
+                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors duration-300 ${
+                    isPaused ? "bg-amber-400" : "bg-emerald-400 animate-pulse"
+                  }`}
+                />
+                <span className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider">
+                  {isPaused ? "Paused" : "Auto"}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -1112,21 +1111,6 @@ export default function EventCarouselBanner() {
           }`}
           style={{ width: `${progress}%` }}
         />
-      </div>
-
-      {/* Keyboard hint */}
-      <div className="absolute bottom-4 right-4 hidden lg:flex items-center gap-2 text-white/30 text-xs">
-        <kbd className="px-2 py-1 rounded bg-white/5 border border-white/10">
-          ←
-        </kbd>
-        <kbd className="px-2 py-1 rounded bg-white/5 border border-white/10">
-          →
-        </kbd>
-        <span>Navigate</span>
-        <kbd className="px-2 py-1 rounded bg-white/5 border border-white/10 ml-2">
-          Space
-        </kbd>
-        <span>Play/Pause</span>
       </div>
 
       {/* Styles */}
@@ -1147,6 +1131,15 @@ export default function EventCarouselBanner() {
         
         .animate-spin-slow-reverse {
           animation: spin-slow-reverse 4s linear infinite;
+        }
+        
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </section>
