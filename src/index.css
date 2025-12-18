@@ -1,0 +1,91 @@
+@import "tailwindcss";
+.nav-mobile-item {
+  @apply block w-full text-left text-gray-300 hover:text-white 
+         text-[16px] font-light tracking-wide transition;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out both;
+}
+.mobile-item {
+  @apply block text-left text-[18px] text-gray-300 hover:text-white transition;
+}
+/* Glowing underline animation */
+.glow-underline {
+  box-shadow: 0 0 4px 1px rgba(120, 160, 255, 0.35);
+}
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-dropdown {
+  animation: dropdown 0.25s ease-out both;
+}
+/* Soft underline glow */
+.glow-underline {
+  box-shadow: 0 0 4px 1px rgba(130, 170, 255, 0.4);
+}
+
+/* Mobile menu items */
+.mobile-item {
+  @apply block text-left text-[18px] text-gray-300 hover:text-white transition;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out both;
+}
+
+/* Dropdown animation */
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-dropdown {
+  animation: dropdown 0.25s ease-out both;
+}
+/* Add to your global styles */
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+    linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-grid-pattern-sm {
+  background-image: linear-gradient(to right, #d1d5db 0.5px, transparent 0.5px),
+    linear-gradient(to bottom, #d1d5db 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
