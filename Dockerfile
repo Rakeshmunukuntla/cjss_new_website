@@ -10,7 +10,7 @@ RUN npm install
  
 # Copy the rest of the project
 COPY . .
-RUN npm run build
+RUN npm run dev
  
 # Second stage: Use NGINX to serve the build files
 FROM nginx:alpine
