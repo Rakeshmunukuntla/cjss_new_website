@@ -582,7 +582,7 @@ export const AboutPage = () => {
           <h2 className="mb-12 text-4xl font-bold text-center text-white">
             Our Global Presence
           </h2>
-          <GlobalPresenceMerged />
+          {/* <GlobalPresenceMerged /> */}
         </div>
       </section>
     </div>
